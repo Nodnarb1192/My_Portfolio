@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookSquare, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
+
 
 const Footer = () => {
     return (
@@ -34,13 +34,13 @@ const Footer = () => {
                         <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Useful Links</span>
                         <ul class="list-unstyled">
                         <li>
-                            <Link class="text-black font-semibold block pb-2 text-sm" to="/about">About Us</Link>
+                            <a class="text-black font-semibold block pb-2 text-sm" href="/about">About Us</a>
                         </li>
                         <li>
                             <a class="text-black font-semibold block pb-2 text-sm" href="https://github.com/Nodnarb1192">Github</a>
                         </li>
                         <li>
-                            <Link class="text-black font-semibold block pb-2 text-sm" to="/contact">Contact Me</Link>
+                            <a class="text-black font-semibold block pb-2 text-sm" href="/contact">Contact Me</a>
                         </li>
                         </ul>
                     </div>

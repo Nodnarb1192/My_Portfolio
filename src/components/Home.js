@@ -1,7 +1,7 @@
 import React from "react";
 import './Home.css';
 import styled, { keyframes } from 'styled-components';
-import { Link } from 'react-router-dom';
+
 
 const glitch = keyframes`
 0%{
@@ -128,9 +128,9 @@ function Home() {
                 <div className="bg-[#fff700] bg-opacity-35 rounded-2xl p-4 mx-auto max-w-3xl" style={{ border: '1px solid black' }}>
                 <p className="lg: text-xl pt-8"> Dive into the world where data meets innovation.</p> 
                 <p className="lg: text-xl"> Explore how my expertise in Python, software engineering, and data analytics transforms challenges into solutions.</p>
-                <Link to="/projects">
+                <a href="/projects">
                 <StyledButton content="Projects" >Projects</StyledButton>
-                </Link>
+                </a>
                 </div>
             </div>
             <div>
@@ -142,9 +142,9 @@ function Home() {
                     in a fast-paced environment. I am a quick learner and a team player. I am always looking for new challenges and 
                     opportunities to grow. I am excited to work on projects that make a positive impact on the world. I am looking forward to working with you.
                 </p>
-                <Link to="/about">
+                <a href="/about">
                 <StyledButton content="Get to Know me" >Get to Know me</StyledButton>
-                </Link>
+                </a>
                 </div>
             </div>
         </div>

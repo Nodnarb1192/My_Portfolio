@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
-import { Link } from 'react-router-dom';
+
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -281,7 +281,7 @@ function Notfound() {
                     <h1 t="404">404</h1>
                     <Bottom>
                         <p>You have lost your way</p>
-                        <Link to="/">return home</Link>
+                        <a href="/">return home</a>
                     </Bottom>
                 </Message>
             </ErrorBody>
