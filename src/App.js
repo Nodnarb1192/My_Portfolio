@@ -9,7 +9,7 @@ import Contact from './components/Contact';
 import LoadingScreen from './components/loading';
 import Footer from './components/Footer';
 
-import {HashRouter, Route, Routes } from 'react-router-dom';
+import {Router, Route, Routes } from 'react-router-dom';
 
 function App() {
     const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ function App() {
     }
 
     return (
-        <HashRouter>
+        <Router>
             <div className="App">
                 <Routes>
                     <Route path="/" element={<><Navbar /><Home /><Footer /></>} />
@@ -45,7 +45,7 @@ function App() {
                     <Route path="*" element={<Notfound />} />
                 </Routes>
             </div>
-        </HashRouter>
+        </Router>
     );
 }
 
