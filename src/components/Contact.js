@@ -89,7 +89,7 @@ const StyledButton = styled.button`
 `;
 
 function Contact() {
-
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
 
@@ -103,7 +103,7 @@ function Contact() {
         
     
         try {
-            await axios.post('http://localhost:3000/send-email', { from, subject, name, text });
+            await axios.post('${API_BASE_URL}/send-email', { name, from, subject, text });
             setToastMessage('Email sent successfully');
             setShowToast(true);
             setTimeout(() => setShowToast(false), 3000); // Hide toast after 3 seconds
