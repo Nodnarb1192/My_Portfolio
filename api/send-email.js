@@ -1,8 +1,11 @@
 const nodemailer = require('nodemailer');
 
 module.exports = async (req, res) => {
+    console.log(`Request method: ${req.method}`);
+    console.log(`Request headers: ${JSON.stringify(req.headers)}`);
     if (req.method === 'POST') {
         // Parse the request body
+        console.log(`Request body: ${JSON.stringify(req.body)}`);
         const { from, subject, name, text } = req.body;
 
         // Set up your nodemailer transporter here
@@ -33,6 +36,7 @@ module.exports = async (req, res) => {
         }
     } else {
         // Handle any non-POST requests
+        console.log(`Unexpected request method: ${req.method}`);
         res.setHeader('Allow', ['POST']);
         res.status(405).end(`Method ${req.method} Not Allowed`);
     }
