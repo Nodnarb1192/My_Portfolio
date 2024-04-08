@@ -103,7 +103,7 @@ function Contact() {
         
     
         try {
-            await axios.post('${API_BASE_URL}/send-email', { name, from, subject, text });
+            await axios.post(`${API_BASE_URL}/send-email`, { name, from, subject, text });
             setToastMessage('Email sent successfully');
             setShowToast(true);
             setTimeout(() => setShowToast(false), 3000); // Hide toast after 3 seconds
