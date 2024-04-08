@@ -56,6 +56,13 @@ body, html {
   clip: rect(0, 90rem, 0, 0);
   animation: noise 4s infinite linear alternate-reverse;
 }
+
+@media (max-width: 600px) {
+  .glitch {
+    font-size: 5rem;
+  }
+}
+
 @keyframes noise {
   0% {
     clip: rect(1rem, 99.99rem, 10rem, 0);
