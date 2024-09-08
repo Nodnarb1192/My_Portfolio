@@ -13,21 +13,18 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 function App() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Check if the user has visited the site before
-        if (!localStorage.getItem('hasVisited')) {
-            setLoading(true);
-
+        if (!sessionStorage.getItem('hasVisited')) {
             const timer = setTimeout(() => {
                 setLoading(false);
+                sessionStorage.setItem('hasVisited', 'true');
             }, 3000); // Change this value to adjust the duration of the loading screen
 
-            // Set the flag in localStorage
-            localStorage.setItem('hasVisited', 'true');
-
             return () => clearTimeout(timer); // This will clear the timer when the component unmounts
+        } else {
+            setLoading(false);
         }
     }, []);
 
