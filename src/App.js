@@ -10,8 +10,6 @@ import LoadingScreen from './components/loading';
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-
-
 function App() {
     const [loading, setLoading] = useState(true);
 
@@ -20,28 +18,64 @@ function App() {
             const timer = setTimeout(() => {
                 setLoading(false);
                 sessionStorage.setItem('hasVisited', 'true');
-            }, 3000); // Change this value to adjust the duration of the loading screen
+            }, 3000); // Adjust the duration of the loading screen here
 
-            return () => clearTimeout(timer); // This will clear the timer when the component unmounts
+            return () => clearTimeout(timer); // Clears the timer when the component unmounts
         } else {
             setLoading(false);
         }
     }, []);
 
-    if (loading) {
-        return <LoadingScreen />; // Replace this with your loading screen
-    }
-
     return (
         <Router>
             <div className="App">
-                <Routes>
-                    <Route path="/" element={<><Navbar /><Home /><Footer /></>} />
-                    <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
-                    <Route path="/projects" element={<><Navbar /><Projects /><Footer /></>} />
-                    <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />
-                    <Route path="*" element={<Notfound />} />
-                </Routes>
+                {loading ? (
+                    <LoadingScreen />
+                ) : (
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <>
+                                    <Navbar />
+                                    <Home />
+                                    <Footer />
+                                </>
+                            }
+                        />
+                        <Route
+                            path="/about"
+                            element={
+                                <>
+                                    <Navbar />
+                                    <About />
+                                    <Footer />
+                                </>
+                            }
+                        />
+                        <Route
+                            path="/projects"
+                            element={
+                                <>
+                                    <Navbar />
+                                    <Projects />
+                                    <Footer />
+                                </>
+                            }
+                        />
+                        <Route
+                            path="/contact"
+                            element={
+                                <>
+                                    <Navbar />
+                                    <Contact />
+                                    <Footer />
+                                </>
+                            }
+                        />
+                        <Route path="*" element={<Notfound />} />
+                    </Routes>
+                )}
             </div>
         </Router>
     );
