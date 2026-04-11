@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import './Home.css';
 import styled, { keyframes } from 'styled-components';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -109,7 +109,7 @@ function Home() {
                     <div className="wrapper">
                         <input type="checkbox" id="check" hidden />
                         <div className="viewport">
-                            <img src={process.env.PUBLIC_URL + '/hero.png'} alt="Hero Image" className="main-img rounded-3xl" />
+                            <img src={process.env.PUBLIC_URL + '/hero.png'} alt="Hero" className="main-img rounded-3xl" />
                             <div className="ab ab-1"></div>
                             <div className="ab ab-2"></div>
                             <div className="ab ab-3"></div>
@@ -117,7 +117,7 @@ function Home() {
                             <div className="ab ab-5"></div>
                             <div className="line">
                                 <div className="line-supwrap">
-                                    <img src={process.env.PUBLIC_URL + '/hero.png'} alt="Hero Image" className="line-img" />
+                                    <img src={process.env.PUBLIC_URL + '/hero.png'} alt="Hero" className="line-img" />
                                     <div className="ab ab-1"></div>
                                     <div className="ab ab-2"></div>
                                     <div className="ab ab-3"></div>

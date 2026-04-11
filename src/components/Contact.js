@@ -166,7 +166,7 @@ function Contact() {
                                 Get in touch
                             </h1>
                             <p className="text-lg sm:text-2xl font-medium mt-2" style={{ color: '#00E6F6', fontFamily: "'Cyber', sans-serif", letterSpacing: '1px' }}>
-                                // Fill in the form to start a conversation_
+                                {'// Fill in the form to start a conversation_'}
                             </p>
 
                             {/* Location */}

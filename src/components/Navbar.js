@@ -30,9 +30,9 @@ function Navbar() {
             className={`cybr-btn${isActive(href) ? ' cybr-btn--active' : ''}`}
           >
             <a href={href}>
-              <span className="off-hover">// {label}<span aria-hidden="true">_</span></span>
-              <span aria-hidden="true" className="on-hover">// {label}_</span>
-              <span aria-hidden="true" className="cybr-btn__glitch">// {label}_</span>
+              <span className="off-hover">{'// '}{label}<span aria-hidden="true">_</span></span>
+              <span aria-hidden="true" className="on-hover">{'// '}{label}_</span>
+              <span aria-hidden="true" className="cybr-btn__glitch">{'// '}{label}_</span>
               <span aria-hidden="true" className="cybr-btn__tag">BH92</span>
             </a>
           </button>
@@ -47,9 +47,9 @@ function Navbar() {
           aria-expanded={isOpen}
           aria-label="Toggle menu"
         >
-          <span className="off-hover">// {isOpen ? 'Close' : 'Menu'}<span aria-hidden="true">_</span></span>
-          <span aria-hidden="true" className="on-hover">// {isOpen ? 'Close' : 'Menu'}_</span>
-          <span aria-hidden="true" className="cybr-btn__glitch">// {isOpen ? 'Close' : 'Menu'}_</span>
+          <span className="off-hover">{'// '}{isOpen ? 'Close' : 'Menu'}<span aria-hidden="true">_</span></span>
+          <span aria-hidden="true" className="on-hover">{'// '}{isOpen ? 'Close' : 'Menu'}_</span>
+          <span aria-hidden="true" className="cybr-btn__glitch">{'// '}{isOpen ? 'Close' : 'Menu'}_</span>
           <span aria-hidden="true" className="cybr-btn__tag">BH92</span>
         </button>
 
@@ -62,9 +62,9 @@ function Navbar() {
                 onClick={() => setIsOpen(false)}
               >
                 <a href={href}>
-                  <span className="off-hover">// {label}<span aria-hidden="true">_</span></span>
-                  <span aria-hidden="true" className="on-hover">// {label}_</span>
-                  <span aria-hidden="true" className="cybr-btn__glitch">// {label}_</span>
+                  <span className="off-hover">{'// '}{label}<span aria-hidden="true">_</span></span>
+                  <span aria-hidden="true" className="on-hover">{'// '}{label}_</span>
+                  <span aria-hidden="true" className="cybr-btn__glitch">{'// '}{label}_</span>
                   <span aria-hidden="true" className="cybr-btn__tag">BH92</span>
                 </a>
               </button>
