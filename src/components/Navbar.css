@@ -1,0 +1,23 @@
+.mobile-menu {
+  position: absolute;
+  right: 0;
+  top: 80px;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.92);
+  border: 1px solid #00E6F6;
+  box-shadow: 0 0 24px rgba(0, 230, 246, 0.35), 0 0 6px rgba(0, 230, 246, 0.15);
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 280px;
+  overflow: hidden;
+}
+
+.mobile-menu--open {
+  clip-path: inset(0 0 0% 0);
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

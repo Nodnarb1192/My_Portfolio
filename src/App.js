@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Notfound from './components/Notfound';
@@ -8,6 +9,9 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import LoadingScreen from './components/loading';
 import Footer from './components/Footer';
+import CyberCursor from './components/CyberCursor';
+import MatrixRain from './components/MatrixRain';
+import PageTransition from './components/PageTransition';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -18,66 +22,71 @@ function App() {
             const timer = setTimeout(() => {
                 setLoading(false);
                 sessionStorage.setItem('hasVisited', 'true');
-            }, 3000); // Adjust the duration of the loading screen here
-
-            return () => clearTimeout(timer); // Clears the timer when the component unmounts
+            }, 3000);
+            return () => clearTimeout(timer);
         } else {
             setLoading(false);
         }
     }, []);
 
     return (
+        <HelmetProvider>
         <Router>
             <div className="App">
                 {loading ? (
                     <LoadingScreen />
                 ) : (
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={
-                                <>
-                                    <Navbar />
-                                    <Home />
-                                    <Footer />
-                                </>
-                            }
-                        />
-                        <Route
-                            path="/about"
-                            element={
-                                <>
-                                    <Navbar />
-                                    <About />
-                                    <Footer />
-                                </>
-                            }
-                        />
-                        <Route
-                            path="/projects"
-                            element={
-                                <>
-                                    <Navbar />
-                                    <Projects />
-                                    <Footer />
-                                </>
-                            }
-                        />
-                        <Route
-                            path="/contact"
-                            element={
-                                <>
-                                    <Navbar />
-                                    <Contact />
-                                    <Footer />
-                                </>
-                            }
-                        />
-                        <Route path="*" element={<Notfound />} />
-                    </Routes>
+                    <>
+                        <CyberCursor />
+                        <MatrixRain />
+                        <Routes>
+                            <Route
+                                path="/"
+                                element={
+                                    <PageTransition>
+                                        <Navbar />
+                                        <Home />
+                                        <Footer />
+                                    </PageTransition>
+                                }
+                            />
+                            <Route
+                                path="/about"
+                                element={
+                                    <PageTransition>
+                                        <Navbar />
+                                        <About />
+                                        <Footer />
+                                    </PageTransition>
+                                }
+                            />
+                            <Route
+                                path="/projects"
+                                element={
+                                    <PageTransition>
+                                        <Navbar />
+                                        <Projects />
+                                        <Footer />
+                                    </PageTransition>
+                                }
+                            />
+                            <Route
+                                path="/contact"
+                                element={
+                                    <PageTransition>
+                                        <Navbar />
+                                        <Contact />
+                                        <Footer />
+                                    </PageTransition>
+                                }
+                            />
+                            <Route path="*" element={<Notfound />} />
+                        </Routes>
+                    </>
                 )}
             </div>
         </Router>
+        </HelmetProvider>
     );
 }
 

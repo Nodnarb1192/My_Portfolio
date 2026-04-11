@@ -1,304 +1,231 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import './Projects.css';
-import styled, { keyframes } from 'styled-components';
+import SEO from './SEO';
 
-const glitch = keyframes`
-0%{
-    clip-path:var(--slice-1);
-    transform:translate(-20px,-10px);
-  }
-  10%{
-    clip-path:var(--slice-3);
-    transform:translate(10px,10px);
-  }
-  20%{
-      clip-path:var(--slice-1);
-    transform:translate(-10px,10px);
-  }
-  30%{
-      clip-path:var(--slice-3);
-    transform:translate(0px,5px);
-  }
-  40%{
-      clip-path:var(--slice-2);
-    transform:translate(-5px,0px);
-  }
-  50%{
-      clip-path:var(--slice-3);
-    transform:translate(5px,0px);
-  }
-  60%{
-      clip-path:var(--slice-4);
-    transform:translate(5px,10px);
-  }
-  70%{
-      clip-path:var(--slice-2);
-    transform:translate(-10px,10px);
-  }
-  80%{
-      clip-path:var(--slice-5);
-    transform:translate(20px,-10px);
-  }
-  90%{
-      clip-path:var(--slice-1);
-    transform:translate(-10px,0px);
-  }
-  100%{
-      clip-path:var(--slice-1);
-    transform:translate(-20px,-10px);
-  }
-`;
+const CATEGORIES = ['All', 'Data Analysis', 'Machine Learning', 'Deep Learning', 'Software Dev'];
 
-const StyledButton = styled.button`
-    width: 200px;
-    height: 40px;
-    font-size: 24px;
-    transform: ${props => props.transform || 'none'};
-    margin-right: ${props => props.marginRight || '0px'};
-    font-family: 'cyber';
-    background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
-    border: 0;
-    color: #ffffff;
-    letter-spacing: 3px;
-    // line-height: 88px;
-    box-shadow: 6px 0px 0px #00E6F6;
-    outline: transparent;
-    position: relative;
-    
-    & > span {
-        display: inline-block;
-        transform: scalex(-1);
-    }
+const CATEGORY_COLORS = {
+  'Data Analysis':   '#00E6F6',
+  'Machine Learning':'#F8F005',
+  'Deep Learning':   '#FF013C',
+  'Software Dev':    '#39ff14',
+};
 
-    &::after {
-        --slice-0:inset(50% 50% 50% 50%);
-        --slice-1:inset(80% -6px 0 0);
-        --slice-2:inset(50% -6px 30% 0);
-        --slice-3:inset(10% -6px 85% 0);
-        --slice-4:inset(40% -6px 43% 0);
-        --slice-5:inset(80% -6px 5% 0);
-        content: "${props => props.content || 'Read More'}";
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 5%);
-        text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
-        clip-path: inset(50% 50% 50% 50%);
-    }
+const projectsData = [
+  {
+    id: 1,
+    title: 'Music Preferences Analysis',
+    description: 'Analyzed real Yandex.Music data to compare music preferences between Springfield and Shelbyville, testing hypotheses that could impact business decisions.',
+    image: 'project_image_1.png',
+    category: 'Data Analysis',
+    tags: ['Python', 'Pandas', 'EDA'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%201.%20Basic%20Python',
+  },
+  {
+    id: 2,
+    title: 'Instacart EDA',
+    description: 'Exploratory data analysis on Instacart grocery platform data to clean datasets and derive insights into customer shopping behaviors.',
+    image: 'project_image_2.png',
+    category: 'Data Analysis',
+    tags: ['Python', 'Pandas', 'Matplotlib'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%202.%20Exploratory%20Data%20Analysis%20(EDA)',
+  },
+  {
+    id: 3,
+    title: 'Megaline Telecom Statistical Analysis',
+    description: 'Statistical data analysis for Megaline Telecom evaluating revenue from prepaid plans using Python and statistical methods.',
+    image: 'project_image_3.png',
+    category: 'Data Analysis',
+    tags: ['Python', 'Statistics', 'SciPy'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%203.%20Statistical%20Data%20Analysis',
+  },
+  {
+    id: 4,
+    title: 'Vehicle Data Streamlit App',
+    description: 'Built and deployed a Streamlit web application for vehicle data visualization, demonstrating full software engineering skills.',
+    image: 'project_image_4.png',
+    category: 'Software Dev',
+    tags: ['Python', 'Streamlit', 'Plotly'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%204.%20Software%20Development%20Tools',
+  },
+  {
+    id: 5,
+    title: 'Video Game Success Prediction',
+    description: 'Analyzed historical video game sales data to predict trends and identify potential big winners for targeted advertising campaigns.',
+    image: 'project_image_5.png',
+    category: 'Machine Learning',
+    tags: ['Python', 'ML', 'Pandas'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%205.%20Integrated%20Project%201',
+  },
+  {
+    id: 6,
+    title: 'Chicago Ride-Sharing Trends',
+    description: 'Analyzed Zuber ride-sharing data in Chicago to understand passenger preferences and the impact of weather on ride frequency using SQL.',
+    image: 'project_image_6.png',
+    category: 'Data Analysis',
+    tags: ['SQL', 'Python', 'Statistics'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%206.%20Data%20Collection%20and%20Storage%20(SQL)',
+  },
+  {
+    id: 7,
+    title: 'ML Service Plan Upgrade',
+    description: 'Developed a model analyzing subscriber behavior for Megaline mobile carrier to recommend optimal plan upgrades with >75% accuracy.',
+    image: 'project_image_7.png',
+    category: 'Machine Learning',
+    tags: ['Python', 'Scikit-learn', 'Classification'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%207.%20Introduction%20to%20Machine%20Learning',
+  },
+  {
+    id: 8,
+    title: 'Customer Churn Prediction',
+    description: 'Built a supervised learning model for Beta Bank to predict customer churn with F1 score exceeding 0.59 and strong AUC-ROC.',
+    image: 'project_image_8.png',
+    category: 'Machine Learning',
+    tags: ['Python', 'Scikit-learn', 'AUC-ROC'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%208.%20Supervised%20Learning',
+  },
+  {
+    id: 9,
+    title: 'Oil Well Location Optimization',
+    description: 'Found the most profitable oil well locations for OilyGiant mining using predictive modeling and bootstrapped profit analysis.',
+    image: 'project_image_9.png',
+    category: 'Machine Learning',
+    tags: ['Python', 'Linear Regression', 'Bootstrap'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%209.%20Machine%20Learning%20in%20Business',
+  },
+  {
+    id: 10,
+    title: 'Gold Recovery Efficiency ML',
+    description: 'Created a ML model to predict gold recovery rates from ore, optimizing mining production and eliminating unprofitable parameters.',
+    image: 'project_image_10.png',
+    category: 'Machine Learning',
+    tags: ['Python', 'Regression', 'Feature Engineering'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2010.%20Integrated%20Project%202',
+  },
+  {
+    id: 11,
+    title: 'Insurance Predictive Modelling',
+    description: 'Applied linear algebra for Sure Tomorrow Insurance to predict benefits, identify similar customers, and protect client data.',
+    image: 'project_image_11.png',
+    category: 'Machine Learning',
+    tags: ['Python', 'Linear Algebra', 'Privacy'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2011.%20Linear%20Algebra',
+  },
+  {
+    id: 12,
+    title: 'Used Car Value Prediction',
+    description: 'Built a gradient boosting model for Rusty Bargain to quickly predict used car market values from historical specifications.',
+    image: 'project_image_12.png',
+    category: 'Machine Learning',
+    tags: ['Python', 'Gradient Boosting', 'LightGBM'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2012.%20Numerical%20Methods',
+  },
+  {
+    id: 13,
+    title: 'Taxi Demand Forecasting',
+    description: 'Time series forecasting for Sweet Lift Taxi to predict airport taxi orders per hour for better driver resource management.',
+    image: 'project_image_13.png',
+    category: 'Machine Learning',
+    tags: ['Python', 'Time Series', 'SARIMA'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2013.%20Time%20Series',
+  },
+  {
+    id: 14,
+    title: 'Movie Review Sentiment Analysis',
+    description: 'Built an NLP model for Film Junky Union to automatically classify movie reviews as positive or negative with F1 score above 0.85.',
+    image: 'project_image_14.png',
+    category: 'Deep Learning',
+    tags: ['Python', 'NLP', 'BERT'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2014.%20Machine%20Learning%20for%20Texts',
+  },
+  {
+    id: 15,
+    title: 'Age Verification via Computer Vision',
+    description: 'Built a CNN model for Good Seed supermarkets to verify customer age from photographs for alcohol sale compliance.',
+    image: 'project_image_15.png',
+    category: 'Deep Learning',
+    tags: ['Python', 'CNN', 'ResNet'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2015.%20Computer%20Vision',
+  },
+  {
+    id: 16,
+    title: 'Telecom Churn Prediction',
+    description: 'Final project: comprehensive ML pipeline for Interconnect Telecom to predict customer churn using ensemble methods.',
+    image: 'project_image_16.png',
+    category: 'Machine Learning',
+    tags: ['Python', 'ML Pipeline', 'Ensemble'],
+    link: 'https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2017.%20Final%20Project',
+  },
+];
 
-    &:hover::after {
-        animation: 1s ${glitch};
-        animation-timing-function: steps(2, end);
-    }
-`; 
-// The Projects component definition
 function Projects() {
-    const sliderRef = useRef(null); // Reference to the slider container
+  const [activeFilter, setActiveFilter] = useState('All');
 
-    // Function to move to the next item in the slider
-    const goToNext = () => {
-        const slider = sliderRef.current;
-        const items = slider.querySelectorAll('.item');
-        slider.append(items[0]); // Move the first item to the end
-    };
+  const filtered = activeFilter === 'All'
+    ? projectsData
+    : projectsData.filter(p => p.category === activeFilter);
 
-    // Function to move to the previous item in the slider
-    const goToPrev = () => {
-        const slider = sliderRef.current;
-        const items = slider.querySelectorAll('.item');
-        slider.prepend(items[items.length - 1]); // Move the last item to the front
-    };
-
-    return (
-        <div className='main h-lvh'>
-            <ul className='slider' ref={sliderRef}>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_1.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Music Preferences Analysis in Springfield and Shelbyville</h2>
-                        <p className='description'>In this project, we performed analysis on real Yandex.Music data to understand and compare the music preferences of the cities of Springfield and Shelbyville. The goal was to test a series of hypotheses that could impact business decisions.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%201.%20Basic%20Python">
-                        <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_2.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Exploratory Data Analysis (EDA) on Instacart Data: Summary of Findings</h2>
-                        <p className='description'>This project entailed an exploratory data analysis (EDA) on data provided by Instacart, a grocery delivery platform. The primary goal was to clean the data and derive meaningful insights into the shopping behaviors of Instacart's customers.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%202.%20Exploratory%20Data%20Analysis%20(EDA)">
-                        <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_3.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Statistical Data Analysis for Megaline Telecom: Evaluating Revenue from Prepaid Plans</h2>
-                        <p className='description'>The project started with the integration of necessary Python libraries for data analysis and the importing of various CSV files into respective DataFrame structures. The primary goal was to refine and prepare the data for an insightful statistical analysis.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%203.%20Statistical%20Data%20Analysis">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_4.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Streamlit Web Application for Vehicle Data Visualization</h2>
-                        <p className='description'>This project revolves around the application of key software engineering tasks, aiming to supplement your data skills and increase your marketability for potential employers. The primary tasks involve creating and managing Python virtual environments, developing a web application, and deploying it to a publically accessible cloud service.
-                        The project utilized a dataset of car sales advertisements, although the focus was not primarily on the dataset or the analysis. You're free to choose any dataset that interests you.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%204.%20Software%20Development%20Tools">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_5.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Integrated Project 1: Video Game Success Prediction</h2>
-                        <p className='description'>This project focuses on analyzing historical video game sales data to predict trends that could determine the success of a game. We aim to identify potential big winners and plan advertising campaigns accordingly. Our dataset contains user and expert reviews, genres, platforms (e.g. Xbox or PlayStation), and sales data from various regions dating back to 2016.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%205.%20Integrated%20Project%201">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_6.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Insights into Ride-sharing Trends for Zuber in Chicago</h2>
-                        <p className='description'>This project involves analyzing data for Zuber, a new ride-sharing company that's launching in Chicago. Our aim is to understand passenger preferences and the impact of external factors such as weather on ride frequency. We will be parsing weather data, analyzing taxi ride data, and testing a hypothesis about the impact of weather on ride frequency.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%206.%20Data%20Collection%20and%20Storage%20(SQL)">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_7.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Exploring User Behavior with Machine Learning for Service Upgrade</h2>
-                        <p className='description'>The goal of this project is to develop a model that analyzes subscribers' behavior for a mobile carrier, Megaline, to recommend one of their newer plans: Smart or Ultra. The aim is to transition users from legacy plans to the new ones. The model's accuracy needs to exceed a threshold of 0.75. The data available for this project is monthly behavior information of subscribers who already switched to new plans.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%207.%20Introduction%20to%20Machine%20Learning">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_8.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Customer Churn Prediction Using Supervised Learning</h2>
-                        <p className='description'>Beta Bank is facing a customer churn problem. The aim of this project is to build a predictive model to identify customers who are likely to churn. This can allow the bank to proactively address their issues and improve retention. The model needs to have an F1 score of at least 0.59. Additionally, we will measure the AUC-ROC metric and compare it with the F1.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%208.%20Supervised%20Learning">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_9.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Optimizing Resource Allocation with Machine Learning: A Case Study for the Oil Industry</h2>
-                        <p className='description'>The project involves working for the OilyGiant mining company with the goal of finding the most profitable location for a new oil well. The process includes collecting oil well parameters, building a predictive model for volume reserves, and ultimately choosing the region that promises the highest total profit.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%209.%20Machine%20Learning%20in%20Business">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_10.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>SEnhancing Gold Recovery Efficiency: Implementing Machine Learning in the Mining Industry</h2>
-                        <p className='description'>The project involves creating a prototype machine learning model to predict the recovery rate of gold from gold ore. The aim is to optimize the production and eliminate unprofitable parameters, leading to more profits and lesser harm to the environment.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2010.%20Integrated%20Project%202">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_11.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Optimizing Insurance Predictive Modelling and Data Protection Using Linear Algebra</h2>
-                        <p className='description'>Sure Tomorrow Insurance company wanted to use machine learning to solve several of their tasks. These included identifying similar customers, predicting if a customer would receive an insurance benefit, predicting the number of insurance benefits a new customer might receive, and ensuring client data is protected. This report summarizes the findings of the project.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2011.%20Linear%20Algebra">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_12.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Implementing Numerical Methods for Used Car Market Value Prediction</h2>
-                        <p className='description'>Rusty Bargain, a used car sales service, is developing an application to quickly find out the market value of a car. To aid this process, a model to determine the car's value was built based on historical data including technical specifications, trim versions, and prices.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2012.%20Numerical%20Methods">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_13.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Time Series Analysis for Taxi Demand Forecasting</h2>
-                        <p className='description'>Sweet Lift Taxi company, which provides taxi services at airports, needed to forecast the number of taxi orders for the next hour in order to manage resources better, specifically to ensure adequate number of drivers during peak hours. For this task, historical data on taxi orders was available.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2013.%20Time%20Series">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_14.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Automated Sentiment Analysis for Movie Reviews</h2>
-                        <p className='description'>The Film Junky Union, an engaging community for classic movie enthusiasts, has embarked on a project to develop a system for filtering and categorizing movie reviews. They are interested in training a model capable of automatically identifying negative reviews. The task involved the use of an IMDb movie reviews dataset, which had been labeled according to sentiment polarity. The aim was to construct a model capable of classifying reviews as positive or negative with an F1 score of at least 0.85.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2014.%20Machine%20Learning%20for%20Texts">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_15.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Using Computer Vision for Age Verification in Supermarkets</h2>
-                        <p className='description'>Good Seed, a supermarket chain, is exploring the potential of Data Science to ensure their adherence to alcohol laws, specifically regarding the sale of alcohol to underage individuals. This project was undertaken to build and evaluate a model capable of verifying a person's age from a photograph.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2015.%20Computer%20Vision">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-                <li className='item' style={{backgroundImage: `url(${process.env.PUBLIC_URL}/project_image_16.png)`}}>
-                    <div className="content">
-                        <h2 className='title'>Culmination Project: Predicting Customer Churn for Interconnect Telecom</h2>
-                        <p className='description'>The final sprint aimed at applying the knowledge and skills acquired over the course of the previous sprints in a practical setting, with tasks structured to mimic real-world work environments. The main project involved developing a machine learning model prototype following specific instructions. Additionally, an extra assignment was given, which contributed to the final score. Successful completion of the sprint required attaining at least five story points (SP), units for measuring the difficulty of a task.</p>
-                        <a href="https://github.com/Nodnarb1192/TripleTen/tree/main/Sprint%2017.%20Final%20Project">
-                            <StyledButton>
-                            Read More
-                        </StyledButton>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <div className='nav'>
-                <StyledButton content="Previous" marginRight="20px" onClick={goToPrev}>Previous</StyledButton>
-                <StyledButton content="Next" transform="scaleX(-1)" onClick={goToNext}><span>Next</span></StyledButton>
-            </div>
+  return (
+    <div className="projects-page">
+      <SEO
+        title="Projects — Data Science & ML Portfolio"
+        description="Browse 16 data science and machine learning projects by Brandon Harrelson: NLP, computer vision, time series forecasting, customer churn, and more — all built with Python."
+        path="/projects"
+      />
+      <div className="projects-header">
+        <h1 className="text-7xl p-8">Projects</h1>
+        <div className="filter-bar">
+          {CATEGORIES.map(cat => (
+            <button
+              key={cat}
+              className={`filter-btn${activeFilter === cat ? ' filter-btn--active' : ''}`}
+              onClick={() => setActiveFilter(cat)}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
-    );
+      </div>
+
+      <div className="projects-grid">
+        {filtered.map((project) => (
+          <div
+            key={project.id}
+            className="project-card"
+            style={{
+              backgroundImage: `url(${process.env.PUBLIC_URL}/${project.image})`,
+              '--card-color': CATEGORY_COLORS[project.category],
+            }}
+          >
+            <div
+              className="project-card__category"
+              style={{ background: CATEGORY_COLORS[project.category], color: project.category === 'Machine Learning' ? '#000' : '#000' }}
+            >
+              {project.category}
+            </div>
+            <div className="project-card__content">
+              <h3 className="project-card__title">{project.title}</h3>
+              <p className="project-card__desc">{project.description}</p>
+              <div className="project-card__tags">
+                {project.tags.map(tag => (
+                  <span key={tag} className="project-card__tag">{tag}</span>
+                ))}
+              </div>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-card__link"
+                onClick={e => e.stopPropagation()}
+              >
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default Projects;

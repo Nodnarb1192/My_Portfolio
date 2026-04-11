@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --neon-cyan: #00E6F6;
+  --neon-yellow: #fff700;
+  --neon-pink: #FF013C;
+  --neon-magenta: #ff00a0;
+  --glow-cyan: 0 0 8px #00E6F6, 0 0 16px #00E6F6, 0 0 32px rgba(0, 230, 246, 0.4);
+  --glow-pink: 0 0 8px #FF013C, 0 0 16px rgba(255, 1, 60, 0.5);
+  --glow-yellow: 0 0 8px #fff700, 0 0 16px rgba(255, 247, 0, 0.5);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -14,4 +24,196 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* ── Scroll Reveal ─────────────────────────────────────────── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.scroll-reveal.scroll-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal-glitch {
+  opacity: 0;
+}
+
+.scroll-reveal-glitch.scroll-revealed {
+  animation: glitchReveal 0.55s ease forwards;
+}
+
+@keyframes glitchReveal {
+  0%   { opacity: 0; transform: translateX(-8px); filter: blur(3px) hue-rotate(90deg); }
+  20%  { opacity: 0.7; transform: translateX(5px); filter: blur(1px); }
+  40%  { opacity: 0.5; transform: translateX(-4px); filter: blur(2px); }
+  60%  { opacity: 0.9; transform: translateX(2px); filter: none; }
+  80%  { opacity: 0.8; transform: translateX(-1px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Neon Glow Utilities ────────────────────────────────────── */
+.neon-text-cyan  { text-shadow: var(--glow-cyan);   color: var(--neon-cyan);   }
+.neon-text-pink  { text-shadow: var(--glow-pink);   color: var(--neon-pink);   }
+.neon-text-yellow{ text-shadow: var(--glow-yellow); color: var(--neon-yellow); }
+
+.neon-border-cyan {
+  box-shadow: var(--glow-cyan);
+  border-color: var(--neon-cyan) !important;
+}
+
+/* ── Cyberpunk Content Box ──────────────────────────────────── */
+.cyber-box {
+  position: relative;
+  background: rgba(255, 247, 0, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+/* top-left corner accent */
+.cyber-box::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px;
+  width: 22px; height: 22px;
+  border-top: 3px solid #00E6F6;
+  border-left: 3px solid #00E6F6;
+  pointer-events: none;
+}
+
+/* bottom-right corner accent */
+.cyber-box::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; right: -2px;
+  width: 22px; height: 22px;
+  border-bottom: 3px solid #FF013C;
+  border-right: 3px solid #FF013C;
+  pointer-events: none;
+}
+
+/* ── Skill Panel — two-div clip-path border technique ───────── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Outer border layer — colored clip-path acts as border */
+.skill-panel-border {
+  padding: 2px;
+  background: var(--panel-color, #00E6F6);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  filter: drop-shadow(0 0 10px var(--panel-color, #00E6F6));
+}
+
+/* Inner dark panel */
+.skill-category {
+  background: #0d0d14;
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+  padding: 1.5rem;
+  position: relative;
+}
+
+.skill-category h2 {
+  font-family: 'Cyber', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  margin-bottom: 1.25rem;
+  color: #fff;
+}
+
+.skill-item {
+  margin-bottom: 1.1rem;
+}
+
+.skill-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Cyber', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.skill-percent {
+  opacity: 0.7;
+  font-size: 0.75rem;
+}
+
+.skill-track {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: visible;
+  position: relative;
+}
+
+.skill-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 3px;
+  background: var(--skill-color, #00E6F6);
+  box-shadow: 0 0 8px var(--skill-color, #00E6F6);
+  position: relative;
+}
+
+.skill-fill--filled {
+  animation: fillBar 1.2s cubic-bezier(0.4, 0, 0.2, 1) var(--skill-delay, 0s) forwards;
+}
+
+.skill-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(50%, -50%);
+  width: 9px;
+  height: 9px;
+  background: var(--skill-color, #00E6F6);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--skill-color, #00E6F6), 0 0 16px var(--skill-color, #00E6F6);
+  opacity: 0;
+}
+
+.skill-fill--filled::after {
+  animation: dotAppear 0.3s ease calc(var(--skill-delay, 0s) + 1.1s) forwards;
+}
+
+@keyframes fillBar {
+  from { width: 0; }
+  to   { width: var(--skill-width, 0%); }
+}
+
+@keyframes dotAppear {
+  from { opacity: 0; transform: translate(50%, -50%) scale(0); }
+  to   { opacity: 1; transform: translate(50%, -50%) scale(1); }
+}
+
+/* ── Typewriter Cursor ──────────────────────────────────────── */
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: #FF013C;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: cursorBlink 0.75s step-end infinite;
+  box-shadow: 0 0 8px #FF013C;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }

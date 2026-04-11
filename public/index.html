@@ -2,49 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Experienced Freelance Programmer specializing in Python, Data Analytics, Data Science, and Software Engineering. Explore my portfolio to see projects, analyses, and software solutions." />
+
+    <!-- Primary SEO -->
+    <title>Brandon Harrelson — Python Developer & Data Scientist | Huffman, TX</title>
+    <meta name="description" content="Brandon Harrelson is a Python Developer, Software Engineer, and Data Scientist based in Huffman, TX. Specializing in machine learning, data analytics, NLP, and full-stack development. Available for freelance projects." />
+    <meta name="keywords" content="Python Developer, Data Scientist, Machine Learning, Data Analytics, Software Engineer, NLP, Computer Vision, React, Django, Flask, SQL, Pandas, Scikit-learn, Brandon Harrelson, Huffman TX, Freelance" />
+    <meta name="author" content="Brandon Harrelson" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="theme-color" content="#fff700" />
+    <link rel="canonical" href="https://my-portfolio-seven-ecru-65.vercel.app/" />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>Freelance Python Programmer & Data Scientist - Brandon Harrelson</title>
-    
-    <!-- Open Graph / Facebook Meta Tags -->
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https://my-portfolio-seven-ecru-65.vercel.app/"/>
-    <meta property="og:title" content="Freelance Python Programmer & Data Scientist"/>
-    <meta property="og:description" content="Dive into my portfolio to explore professional projects in Python programming, data analytics, data science, and software engineering. Available for freelance projects."/>
-    <meta property="og:image" content="https://my-portfolio-seven-ecru-65.vercel.app/hero.png"/>
 
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:url" content="https://my-portfolio-seven-ecru-65.vercel.app/"/>
-    <meta name="twitter:title" content="Freelance Python Programmer & Data Scientist"/>
-    <meta name="twitter:description" content="Discover professional projects and software solutions in Python, data analytics, and data science. Let's collaborate on your next project."/>
-    <meta name="twitter:image" content="https://my-portfolio-seven-ecru-65.vercel.app/hero.png"/>
+    <!-- Preconnect for external font CDN -->
+    <link rel="preconnect" href="https://assets.codepen.io" crossorigin />
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://my-portfolio-seven-ecru-65.vercel.app/"/>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:locale"      content="en_US" />
+    <meta property="og:site_name"   content="Brandon Harrelson Portfolio" />
+    <meta property="og:url"         content="https://my-portfolio-seven-ecru-65.vercel.app/" />
+    <meta property="og:title"       content="Brandon Harrelson — Python Developer & Data Scientist" />
+    <meta property="og:description" content="Explore professional Python, data science, and machine learning projects. Available for freelance development and data consulting." />
+    <meta property="og:image"       content="https://my-portfolio-seven-ecru-65.vercel.app/hero.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"    content="Brandon Harrelson Portfolio Hero Image" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@BrandonH92" />
+    <meta name="twitter:url"         content="https://my-portfolio-seven-ecru-65.vercel.app/" />
+    <meta name="twitter:title"       content="Brandon Harrelson — Python Developer & Data Scientist" />
+    <meta name="twitter:description" content="Explore professional Python, data science, and machine learning projects. Available for freelance development and data consulting." />
+    <meta name="twitter:image"       content="https://my-portfolio-seven-ecru-65.vercel.app/hero.png" />
+    <meta name="twitter:image:alt"   content="Brandon Harrelson Portfolio Hero Image" />
 </head>
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <!-- Structured Data -->
+    <!-- Structured Data — Person -->
     <script type="application/ld+json">
     {
-        "@context": "http://schema.org",
+        "@context": "https://schema.org",
         "@type": "Person",
         "name": "Brandon Harrelson",
         "url": "https://my-portfolio-seven-ecru-65.vercel.app/",
         "image": "https://my-portfolio-seven-ecru-65.vercel.app/hero.png",
-        "jobTitle": ["Freelance Programmer", "Python Developer", "Data Scientist", "Software Engineer"],
-        "worksFor": {"@type": "Organization", "name": "Freelance"},
-        "sameAs": ["https://www.linkedin.com/in/brandon-harrelson/", "https://github.com/Nodnarb1192", "https://www.facebook.com/brandon.harrelson1"],
-        "alumniOf": "TripleTen",
-        "knowsAbout": ["Python Programming", "Data Analytics", "Data Science", "Software Engineering"],
-        "address": {"@type": "PostalAddress", "addressLocality": "Huffman", "addressRegion": "TX", "postalCode": "77336", "addressCountry": "USA"}
+        "description": "Python Developer, Software Engineer, and Data Scientist specializing in machine learning, data analytics, NLP, and full-stack development.",
+        "email": "Brandon_H92@outlook.com",
+        "telephone": "+18328820214",
+        "jobTitle": "Python Developer & Data Scientist",
+        "worksFor": { "@type": "Organization", "name": "Odyssey Analytics" },
+        "sameAs": [
+            "https://www.linkedin.com/in/brandonharrelson",
+            "https://github.com/Nodnarb1192",
+            "https://www.facebook.com/brandon.harrelson1",
+            "https://www.brandonwharrelson.com"
+        ],
+        "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "TripleTen Online",
+            "description": "Data Science Bootcamp"
+        },
+        "knowsAbout": [
+            "Python Programming", "Machine Learning", "Data Analytics",
+            "Data Science", "Software Engineering", "NLP", "Computer Vision",
+            "React", "Django", "Flask", "SQL", "Pandas", "Scikit-learn",
+            "TensorFlow", "Data Visualization", "Big Data"
+        ],
+        "hasOccupation": {
+            "@type": "Occupation",
+            "name": "Python Developer",
+            "occupationLocation": { "@type": "City", "name": "Huffman, TX" },
+            "skills": "Python, Machine Learning, Data Science, Software Engineering"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Huffman",
+            "addressRegion": "TX",
+            "postalCode": "77336",
+            "addressCountry": "US"
+        },
+        "offers": {
+            "@type": "Offer",
+            "itemOffered": {
+                "@type": "Service",
+                "name": "Freelance Python & Data Science Consulting",
+                "description": "Python development, machine learning models, data pipelines, data visualization, and full-stack web applications."
+            }
+        }
     }
     </script>
 </body>

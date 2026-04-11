@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandon Harrelson — Resume</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap');
+
+    :root {
+      --cyan:   #00E6F6;
+      --yellow: #fff700;
+      --pink:   #FF013C;
+      --dark:   #0a0a0f;
+      --panel:  #111118;
+      --border: rgba(0, 230, 246, 0.25);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--dark);
+      color: #e0e0e0;
+      font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    /* ── Top bar ─────────────────────────────────────────────── */
+    .topbar {
+      background: #000;
+      border-bottom: 2px solid var(--cyan);
+      padding: 10px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 20px rgba(0,230,246,0.25);
+    }
+    .topbar-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--cyan);
+      text-transform: uppercase;
+    }
+    .print-btn {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #000;
+      background: var(--cyan);
+      border: none;
+      padding: 8px 22px;
+      cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+      transition: background 0.2s;
+    }
+    .print-btn:hover { background: var(--yellow); }
+
+    /* ── Page wrapper ────────────────────────────────────────── */
+    .page {
+      max-width: 900px;
+      margin: 36px auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      box-shadow: 0 0 40px rgba(0,230,246,0.08);
+      padding: 48px 52px;
+      position: relative;
+    }
+
+    /* corner accents */
+    .page::before, .page::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-color: var(--cyan);
+      border-style: solid;
+    }
+    .page::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .page::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+    /* ── Header ──────────────────────────────────────────────── */
+    .header { margin-bottom: 28px; }
+    .header h1 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 36px;
+      color: #fff;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(0,230,246,0.4);
+      line-height: 1.1;
+    }
+    .header h1 span { color: var(--cyan); }
+    .header .tagline {
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin: 6px 0 14px;
+      font-weight: 600;
+    }
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 24px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11.5px;
+      color: #aaa;
+    }
+    .contact-row a { color: var(--cyan); text-decoration: none; }
+    .contact-row a:hover { color: var(--yellow); }
+    .contact-row .sep { color: var(--pink); }
+
+    /* ── Divider ─────────────────────────────────────────────── */
+    .divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, var(--cyan), transparent);
+      margin: 22px 0;
+    }
+
+    /* ── Section ─────────────────────────────────────────────── */
+    .section { margin-bottom: 26px; }
+    .section-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 5px;
+      margin-bottom: 14px;
+    }
+    .section-title::before { content: '// '; color: var(--pink); }
+
+    /* ── Summary ─────────────────────────────────────────────── */
+    .summary {
+      color: #ccc;
+      font-size: 14.5px;
+      line-height: 1.7;
+      border-left: 2px solid var(--cyan);
+      padding-left: 14px;
+    }
+
+    /* ── Experience ──────────────────────────────────────────── */
+    .job { margin-bottom: 20px; }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .job-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+    .job-company {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--yellow);
+      letter-spacing: 1px;
+    }
+    .job-meta {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: #666;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .job ul {
+      list-style: none;
+      margin-top: 6px;
+    }
+    .job ul li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 13.5px;
+      color: #bbb;
+      margin-bottom: 3px;
+      line-height: 1.55;
+    }
+    .job ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-size: 10px;
+      top: 3px;
+    }
+    .job-sub {
+      margin-top: 12px;
+      padding-left: 14px;
+      border-left: 1px solid var(--border);
+    }
+    .job-sub .job-header { margin-bottom: 2px; }
+    .job-sub .job-title { font-size: 14px; color: #ddd; }
+
+    /* ── Skills grid ─────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 32px;
+    }
+    .skill-group-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--pink);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .skill-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      border: 1px solid var(--border);
+      color: var(--cyan);
+      text-transform: uppercase;
+      clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 0 100%);
+    }
+
+    /* ── Education & Certs ───────────────────────────────────── */
+    .edu-row, .cert-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+    .edu-name { font-weight: 700; color: #fff; font-size: 14.5px; }
+    .edu-degree { color: #aaa; font-size: 13px; }
+    .edu-date {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: #555;
+      white-space: nowrap;
+    }
+    .cert-name { color: #ccc; font-size: 13px; }
+    .cert-name::before { content: '// '; color: var(--cyan); font-family: 'Share Tech Mono', monospace; font-size: 11px; }
+
+    /* ── Awards ──────────────────────────────────────────────── */
+    .award {
+      font-size: 13.5px;
+      color: #ccc;
+      padding-left: 14px;
+      border-left: 2px solid var(--yellow);
+    }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    .resume-footer {
+      margin-top: 28px;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      color: #333;
+      letter-spacing: 2px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── Print styles ────────────────────────────────────────── */
+    @media print {
+      body {
+        background: #fff;
+        color: #111;
+        font-size: 13px;
+      }
+      .topbar { display: none; }
+      .page {
+        margin: 0;
+        padding: 24px 32px;
+        border: none;
+        box-shadow: none;
+        background: #fff;
+        max-width: 100%;
+      }
+      .page::before, .page::after { display: none; }
+      .header h1 { color: #000; text-shadow: none; font-size: 28px; }
+      .header h1 span { color: #000; }
+      .header .tagline { color: #333; }
+      .contact-row { color: #444; }
+      .contact-row a { color: #000; }
+      .section-title { color: #000; border-color: #ccc; }
+      .section-title::before { color: #000; }
+      .divider { background: #ccc; }
+      .summary { color: #222; border-color: #999; }
+      .job-title { color: #000; }
+      .job-company { color: #333; }
+      .job ul li { color: #333; }
+      .job ul li::before { color: #000; }
+      .job-sub { border-color: #ccc; }
+      .job-meta { color: #555; }
+      .skill-tag { border-color: #999; color: #000; }
+      .skill-group-title { color: #000; }
+      .edu-name { color: #000; }
+      .cert-name { color: #333; }
+      .cert-name::before { color: #000; }
+      .award { border-color: #999; color: #333; }
+      .resume-footer { color: #aaa; }
+    }
+
+    @page { margin: 0.6in 0.5in; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span class="topbar-label">// BRANDON_HARRELSON — CURRICULUM_VITAE_</span>
+    <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+  </div>
+
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>Brandon <span>Harrelson</span></h1>
+      <div class="tagline">Python Developer &nbsp;|&nbsp; Data Scientist &nbsp;|&nbsp; Operations Leader</div>
+      <div class="contact-row">
+        <span>515 Brookwater Dr. — Greater Houston, TX</span>
+        <span class="sep">|</span>
+        <span>832-882-0214</span>
+        <span class="sep">|</span>
+        <a href="mailto:Brandon_H92@outlook.com">Brandon_H92@outlook.com</a>
+        <span class="sep">|</span>
+        <a href="https://linkedin.com/in/brandonharrelson" target="_blank">linkedin.com/in/brandonharrelson</a>
+        <span class="sep">|</span>
+        <a href="https://github.com/Nodnarb1192" target="_blank">github.com/Nodnarb1192</a>
+        <span class="sep">|</span>
+        <a href="https://www.brandonwharrelson.com" target="_blank">brandonwharrelson.com</a>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Summary -->
+    <div class="section">
+      <div class="section-title">Summary</div>
+      <p class="summary">
+        Versatile professional combining 10+ years of industrial leadership with expertise in Python development,
+        data science, and machine learning. Proven track record of delivering 20–30% efficiency and compliance
+        improvements across both technology and operations roles. Completed a rigorous Data Science program at
+        TripleTen and served nearly 3 years as a Python Developer at Odyssey Analytics, architecting Big Data
+        solutions and automating pipelines with Python, PostgreSQL, and AWS. Currently applying leadership and
+        analytical skills as Repair Supervisor at Eagle Railcar Services. Actively seeking opportunities to
+        re-apply Python and data science expertise in a technical role.
+      </p>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Technical Skills -->
+    <div class="section">
+      <div class="section-title">Technical Skills</div>
+      <div class="skills-grid">
+        <div>
+          <div class="skill-group-title">Languages &amp; Frameworks</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Django</span>
+            <span class="skill-tag">Flask</span>
+            <span class="skill-tag">Node.js</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title">Data Science &amp; ML</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag">NumPy</span>
+            <span class="skill-tag">Scikit-learn</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">BERT / NLP</span>
+            <span class="skill-tag">Computer Vision</span>
+            <span class="skill-tag">Time Series</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title">Tools &amp; Platforms</div>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Streamlit</span>
+            <span class="skill-tag">Tableau</span>
+            <span class="skill-tag">Power BI</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title">Operations &amp; Leadership</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Team Leadership</span>
+            <span class="skill-tag">Quality Assurance</span>
+            <span class="skill-tag">FRA / AAR Compliance</span>
+            <span class="skill-tag">Process Optimization</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Experience -->
+    <div class="section">
+      <div class="section-title">Professional Experience</div>
+
+      <!-- Eagle Railcar -->
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Eagle Railcar Services — Channelview, TX</div>
+            <div class="job-title">Repair Supervisor</div>
+          </div>
+          <div class="job-meta">June 2025 – Present</div>
+        </div>
+        <ul>
+          <li>Spearhead daily operations of repair team ensuring strict FRA/AAR adherence, enhancing compliance by 15%.</li>
+          <li>Fostered a high-performance environment that improved team efficiency by 20%.</li>
+          <li>Built a robust safety culture through mentoring, reducing incidents by 30%.</li>
+          <li>Managed compliance, workflow, and performance tracking, achieving 25% process optimization.</li>
+        </ul>
+        <div class="job-sub">
+          <div class="job-header">
+            <div class="job-title">Repair Leadman</div>
+            <div class="job-meta">Nov 2024 – June 2025</div>
+          </div>
+          <ul>
+            <li>Led 30 technicians in railcar repair ensuring FRA/AAR compliance — 20% reduction in safety incidents.</li>
+            <li>Enhanced audit readiness and compliance accuracy by 30% through meticulous documentation.</li>
+            <li>Increased team productivity 25% via strategic process improvements.</li>
+            <li>Improved repair turnaround times 15% through cross-departmental collaboration.</li>
+          </ul>
+        </div>
+        <div class="job-sub">
+          <div class="job-header">
+            <div class="job-title">Railcar Repair Technician</div>
+            <div class="job-meta">Sept – Nov 2024</div>
+          </div>
+          <ul>
+            <li>Performed detailed safety appliance repairs per FRA/AAR regulations; initiated improvements that increased efficiency by 15%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Iron Horse -->
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Iron Horse — Beaumont, TX</div>
+            <div class="job-title">Railcar Inbound Inspector</div>
+          </div>
+          <div class="job-meta">Apr – Sept 2024</div>
+        </div>
+        <ul>
+          <li>Conducted comprehensive inspections of hopper cars ensuring FRA/AAR adherence; generated detailed work orders.</li>
+          <li>Spearheaded vendor coordination to reduce downtime and enhance maintenance efficiency.</li>
+        </ul>
+      </div>
+
+      <!-- Odyssey Analytics -->
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Odyssey Analytics — Houston, TX</div>
+            <div class="job-title">Python Developer</div>
+          </div>
+          <div class="job-meta">Jul 2021 – May 2024</div>
+        </div>
+        <ul>
+          <li>Architected large-scale Data Lake House solutions, achieving a 30% increase in database performance.</li>
+          <li>Automated data pipelines using Python, PostgreSQL, and AWS — improved operational efficiency by 25%.</li>
+          <li>Enhanced product capabilities through innovative Python applications, increasing client satisfaction by 25%.</li>
+          <li>Collaborated with remote teams to resolve complex Big Data management challenges.</li>
+        </ul>
+      </div>
+
+      <!-- Union Tank Car -->
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Union Tank Car Company (UTLX) — Cleveland, TX</div>
+            <div class="job-title">Leadman Mechanical</div>
+          </div>
+          <div class="job-meta">Jul 2017 – Feb 2023</div>
+        </div>
+        <ul>
+          <li>Led cross-functional team of 15–20 personnel, achieving 100% pass rate on FRA/AAR compliance inspections.</li>
+          <li>Implemented strategic initiatives contributing to a 20% increase in productivity.</li>
+          <li>Developed and enforced safety protocols ensuring a safe, compliant work environment.</li>
+        </ul>
+      </div>
+
+      <!-- Universal Steel -->
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Universal Steel America — Houston, TX</div>
+            <div class="job-title">Lead Inspector</div>
+          </div>
+          <div class="job-meta">Jan 2015 – Sept 2016</div>
+        </div>
+        <ul>
+          <li>Increased departmental productivity 25% through effective delegation and meticulous documentation.</li>
+          <li>Implemented traceability system ensuring 100% accuracy and compliance.</li>
+          <li>Developed inspection protocols that reduced defects by 15%.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Education -->
+    <div class="section">
+      <div class="section-title">Education</div>
+      <div class="edu-row">
+        <div>
+          <div class="edu-name">TripleTen Online</div>
+          <div class="edu-degree">Data Science Bootcamp — Machine Learning, NLP, Computer Vision, Time Series</div>
+        </div>
+        <div class="edu-date">Oct 2022 – Jul 2023</div>
+      </div>
+      <div class="edu-row" style="margin-top:10px;">
+        <div>
+          <div class="edu-name">Tulsa Welding School</div>
+          <div class="edu-degree">Welding Specialist — Welding Technology / Welder</div>
+        </div>
+        <div class="edu-date">2015 – 2016</div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Certifications -->
+    <div class="section">
+      <div class="section-title">Certifications</div>
+      <div class="cert-row"><span class="cert-name">Python for Everybody Specialization — University of Michigan / Coursera</span></div>
+      <div class="cert-row"><span class="cert-name">The Complete Python 3 Masterclass — From Beginner to Pro</span></div>
+      <div class="cert-row"><span class="cert-name">Using Python to Access Web Data</span></div>
+      <div class="cert-row"><span class="cert-name">Capstone: Retrieving, Processing, and Visualizing Data with Python</span></div>
+      <div class="cert-row"><span class="cert-name">Python Data Structures</span></div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Awards -->
+    <div class="section">
+      <div class="section-title">Honors &amp; Awards</div>
+      <div class="award">Awarded for Stellar Performance in Data Science Internship Program — TripleTen</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="resume-footer">
+      <span>BRANDON_HARRELSON // RESUME_2026</span>
+      <span>REFERENCES AVAILABLE ON REQUEST</span>
+    </div>
+
+  </div>
+
+</body>
+</html>
