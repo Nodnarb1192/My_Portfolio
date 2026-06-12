@@ -194,7 +194,7 @@ function App() {
               <h2>Open a <em>Channel</em></h2>
               <p>Need a machine learning model, a data pipeline, or a full-stack application built? I'm available for freelance development and data consulting. Send a transmission.</p>
               <div className="contact-links">
-                <a className="btn" href="mailto:hello@brandonharrelson.com">Send Email</a>
+                <a className="btn" href="mailto:brandon_h92@outlook.com">Send Email</a>
                 <a className="btn alt" href="https://github.com/Nodnarb1192" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a className="btn" href="https://www.linkedin.com/in/brandon-harrelson-137a3b108/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               </div>
